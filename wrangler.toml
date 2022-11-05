@@ -1,0 +1,36 @@
+name = "ripandis"
+main = "src/index.ts"
+compatibility_date = "2022-11-05"
+# vars = { ENVIRONMENT = "dev" }
+workers_dev = true
+
+[dev]
+port = 8787
+ip = "127.0.0.1"
+local_protocol = "http"
+
+# [triggers]
+# crons = [ "1 * * * *" ]
+
+# [site]
+# bucket = "out"
+# entry-point = "./"
+
+[[ d1_databases ]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "ripandis"
+database_id = "41854b43-150a-454a-8a86-5406e30d8a6e"
+
+[env.staging]
+workers_dev = false
+vars = { ENVIRONMENT = "staging" }
+d1_databases = [
+    { binding = "DB", database_name = "ripandis-stg", database_id = "0d2ea204-1872-412c-b63d-238b14df713e" },
+]
+
+[env.production]
+workers_dev = false
+vars = { ENVIRONMENT = "production" }
+d1_databases = [
+    { binding = "DB", database_name = "ripandis", database_id = "41854b43-150a-454a-8a86-5406e30d8a6e" },
+]
